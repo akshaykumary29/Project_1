@@ -1,3 +1,4 @@
+// import or require mongoose
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
@@ -20,30 +21,32 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-const User = mongoose.model("    ", UserSchema);
+const User = mongoose.model("Tests", UserSchema);
 
 class UserModel {
   findUser(req) {
-    let response = {
+    var response = {
       message: "",
       data: "",
       success: "",
       status: 200,
     };
     return new Promise((resolve, reject) => {
-      User.find({ email: req.email }) // builtin
+      // console.log(req);
+      User.findOne({ email: req.email }) // built in
         .then((data) => {
-          if (data.length > 0) {
+          // console.log(data);
+          if (data) {
             (response.success = true),
               (response.data = data),
-              (response.status = 422),
+              (response.status = 200),
               (response.message = "User is already exist");
             resolve(response);
           } else {
             resolve({
               message: "User not found please register first",
               data: data,
-              status: 200,
+              status: 400,
             });
           }
         })
@@ -54,7 +57,7 @@ class UserModel {
     });
   }
 
-  RegisterUser(req) {
+  RegisterUser(obj) {
     let response = {
       success: true,
       message: "",
@@ -63,24 +66,25 @@ class UserModel {
     };
 
     return new Promise((resolve, reject) => {
-      req
+      obj
         .save()
         .then((data) => {
           (response.success = true),
             (response.message = " Registered Successfully"),
             (response.data = data),
             (response.status = 200);
-          resolve(response);
+          resolve({ response });
         })
         .catch((err) => {
           (response.success = false),
             (response.message = " Registered Failed"),
             (response.data = ""),
-            (response.status = 500);
-          reject(response);
+            (response.status = 400);
+          reject({ response });
         });
     });
   }
 }
 
+// export the model
 module.exports = { UserModel, User };

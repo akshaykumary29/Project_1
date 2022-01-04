@@ -1,4 +1,5 @@
-
+// import
+require("dotenv").config();
 const express = require("express");
 const database = require("./config/database");
 // let mongoose = require('mongoose');
@@ -8,24 +9,17 @@ const router = require("./router/router");
 
 // start your app
 const app = express();
-
+// var expressValidator = require('express-validator');
 
 app.use(express.json());
+// app.use(expressValidator());
+app.use("/", router);
 
-app.use('/', router);
+// launching application at particular por
+const port = process.env.PORT || 4000;
 
-// launching application at particular port
-app.listen(4000, function () {
-  console.log('Application is running at 4000');
+app.listen(port, () => {
+  console.log(`Application is running on port ${port}`);
 });
 
 database();
-
-// mongoose.connect('mongodb+srv://Akshay:akshay@cluster0.onjws.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', (err)=>{
-//     if(err){
-//       console.log("db error")
-//     }
-//     else{
-//       console.log("db connected successfuly")
-//     }
-// });

@@ -11,4 +11,6 @@ const database = async () => {
     console.log("Could not connect to the database.", error);
   }
 };
+
+// export the database
 module.exports = database;
