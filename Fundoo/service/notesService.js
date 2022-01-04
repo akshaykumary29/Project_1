@@ -21,6 +21,16 @@ class ServiceNotes {
     if (foundNotes) 
     return foundNotes;
   }
+
+  async updateNotes(req, res) {
+      let foundNotes = await NotesModel.searchNote(req, res);
+        console.log(foundNotes);
+      if (foundNotes.data) {
+        let updates = await NotesModel.updateNote(req, foundNotes);
+        return updates;
+    }
+    return foundNotes;
+  }
 }
 
 // export the ServiceNotes

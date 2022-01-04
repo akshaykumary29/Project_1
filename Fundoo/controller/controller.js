@@ -1,4 +1,4 @@
-// import
+// import the service
 const service = require("../service/service");
 
 class Registration {

@@ -88,6 +88,58 @@ class NotesModel {
                 });
         });
     }
+
+    searchNote(req) {
+      var response = {
+          message: "",
+          data: "",
+          success: "",
+          status: 200
+      };
+
+      return new Promise((resolve, reject) => {
+          notes.findOne({ _id: req._id })
+              .then((data) => {
+                // console.log(data);
+                  if (data) {
+                      (response.success = true),
+                      (response.data = data),
+                      (response.message = "Update Notes Found"),
+                      (response.status = 200);
+                      resolve(response);
+                  } else {
+                      resolve({
+                          message: "Update Notes are Not Found",
+                          data: null,
+                          status: 401,
+                      });
+                  }
+              })
+              .catch((err) => {
+                  reject({ success: false, error: err });
+              });
+      });
+  }
+
+    updateNote(req, data) {
+      let Note = {
+        title: req.title ? req.title : data.title,
+        description: req.description ? req.description : data.description,
+        isArchived: req.isArchived ? req.isArchived : data.isArchived,
+        isDeleted: req.isDeleted ? req.isDeleted : data.isDeleted,
+        colour: req.colour ? req.colour : data.colour
+      }
+      return new Promise((resolve, reject) => {
+        notes.updateOne({ _id: req._id }, Note)
+        .then((result) => {
+          resolve(result)
+        })
+        .catch((err) => {
+          console.log(err);
+          reject({ success: false, error: err });
+        });
+      });
+    }
 }
 
 

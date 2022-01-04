@@ -19,6 +19,14 @@ class NotesClass {
             return res.status(400).send(err);
         })
     }
+
+    async updateNotes(req, res) {
+        await ServiceNotes.updateNotes(req.body).then((result) => {
+            res.status(200).json(result)
+        }).catch((err) => {
+            return res.status(400).send(err);
+        })
+    }
 }
 
 // export the NotesClass
