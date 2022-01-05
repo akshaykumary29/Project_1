@@ -31,6 +31,13 @@ class ServiceNotes {
     }
     return foundNotes;
   }
+
+  async deleteService(req, res) {
+    let foundNotes = await NotesModel.searchNote(req);
+    if(foundNotes) {
+      return await NotesModel.notes.deleteOne({ _id: foundNotes.data._id })
+    }
+  }
 }
 
 // export the ServiceNotes

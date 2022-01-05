@@ -19,6 +19,10 @@ router.post("/addNotes", auth, notesController.addNotes);
 router.get("/getNotes", auth, notesController.getNotes);
 // route api for update
 router.post("/update", auth, notesController.updateNotes);
+// route api for delete
+router.delete("/delete", auth, notesController.deleteNotes)
+
+
 
 // export the router
 module.exports = router;

@@ -27,6 +27,14 @@ class NotesClass {
             return res.status(400).send(err);
         })
     }
+
+    async deleteNotes(req, res) {
+        await ServiceNotes.deleteService(req.body).then((result) => {
+            res.result(200).json(result)
+        }).catch((err) => {
+            return res.status(401).send(err);
+        })
+    }
 }
 
 // export the NotesClass

@@ -122,6 +122,13 @@ class NotesModel {
   }
 
     updateNote(req, data) {
+      var response = {
+        message: "",
+        data: "",
+        success: "",
+        status: 200
+    };
+    
       let Note = {
         title: req.title ? req.title : data.title,
         description: req.description ? req.description : data.description,
