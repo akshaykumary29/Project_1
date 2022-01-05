@@ -35,6 +35,22 @@ class NotesClass {
             return res.status(401).send(err);
         })
     }
+
+    async isArchieved(req, res) {
+        await ServiceNotes.isArchievedService(req.body).then((result) => {
+            res.status(200).json(result)
+        }).catch((err) => {
+            return res.status(400).send(err);
+        })
+    } 
+
+    async isBin(req, res) {
+        await ServiceNotes.isBinService(req.body).then((result) => {
+            res.status(200).json(result)
+        }).catch((err) => {
+            return res.status(400).send(err);
+        })
+    }
 }
 
 // export the NotesClass

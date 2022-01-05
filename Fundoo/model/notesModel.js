@@ -122,13 +122,14 @@ class NotesModel {
   }
 
     updateNote(req, data) {
+      return new Promise((resolve, reject) => {
       var response = {
         message: "",
         data: "",
         success: "",
         status: 200
     };
-    
+
       let Note = {
         title: req.title ? req.title : data.title,
         description: req.description ? req.description : data.description,
@@ -136,14 +137,21 @@ class NotesModel {
         isDeleted: req.isDeleted ? req.isDeleted : data.isDeleted,
         colour: req.colour ? req.colour : data.colour
       }
-      return new Promise((resolve, reject) => {
+      
         notes.updateOne({ _id: req._id }, Note)
         .then((result) => {
-          resolve(result)
+          response.success = true;
+          response.message = "Update Successfully";
+          response.data = result;
+          response.status = 200;
+          resolve(response);
         })
         .catch((err) => {
           console.log(err);
-          reject({ success: false, error: err });
+          response.success = false;
+          response.message = err;
+          reject(response);
+          // reject({ success: false, error: err });
         });
       });
     }

@@ -21,7 +21,10 @@ router.get("/getNotes", auth, notesController.getNotes);
 router.post("/update", auth, notesController.updateNotes);
 // route api for delete
 router.delete("/delete", auth, notesController.deleteNotes)
-
+// route api for isArchived
+router.get("/isArchived", auth, notesController.isArchieved);
+// route api for isBin
+router.get("/isBin", auth, notesController.isBin);
 
 
 // export the router

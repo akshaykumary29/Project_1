@@ -38,6 +38,25 @@ class ServiceNotes {
       return await NotesModel.notes.deleteOne({ _id: foundNotes.data._id })
     }
   }
+
+  // async isArchievedService(req, res) {
+  //   let foundNotes = await NotesModel.findNotes({ user_id: req.data.id, isArchived: true });
+  //   if(foundNotes) {
+  //     return foundNotes
+  //   }
+  // }
+
+  async isArchievedService(req, res) {
+    let note = { user_id: req.data.id, isArchived: true }
+    let achieved = await NotesModel.findNotes(note);
+    return achieved;
+  }
+
+  async isBinService(req, res) {
+    let note = { user_id: req.data.id, isDeleted: true }
+    let bin = await NotesModel.findNotes(note);
+    return bin;
+  }
 }
 
 // export the ServiceNotes
