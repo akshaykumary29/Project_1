@@ -8,6 +8,8 @@ const newmodel = model.User;
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const nodemailer = require("../middleware/nodemailer");
+
 class Service {
   async UserRegistration(req, res) {
     let foundUser = await userModel.findUser(req);
@@ -68,6 +70,29 @@ class Service {
         });
       }
     } else return findUser;
+  }
+
+  async forgetService(req, res) {
+    let response = {
+      success: true,
+      message: "",
+      data: ""
+    }
+
+    let foundUser = await userModel.findUser({ email: req.email });
+    if(foundUser.data) {
+      const payload = { id: foundUser.data._id, email: foundUser.data.email }
+      const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET)
+
+      let update = await nodemailer.sendMail(foundUser.data.email, token);
+      return update;
+    } else {
+      response.success = false,
+      response.message = "User Not Found",
+      response.data = "",
+      response.status = 400;
+      return response;
+    }
   }
 }
 

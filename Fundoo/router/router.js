@@ -13,6 +13,9 @@ const router = express.Router();
 router.post("/register", controller.registerUser);
 // route api for login
 router.post("/login", controller.loginUser);
+// route api for forgetPassword
+router.post("/forgetPassword", controller.forgetUser);
+
 // route api for addNotes
 router.post("/addNotes", auth, notesController.addNotes);
 // route api for getNotes

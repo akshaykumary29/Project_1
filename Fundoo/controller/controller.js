@@ -25,6 +25,15 @@ class Registration {
         return res.status(500).send(err);
       });
   }
+
+  forgetUser(req, res) {
+    service
+      .forgetService(req.body).then((result) => {
+        res.status(200).json(result)
+      }).catch((err) => {
+        return res.status(400).send(err);
+      })
+  }
 }
 
 // export the Registration
