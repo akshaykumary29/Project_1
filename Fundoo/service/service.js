@@ -41,9 +41,7 @@ class Service {
       );
       if (matchPassword) {
         const payload = { id: findUser.data._id, email: findUser.data.email };
-        const token = jwt.sign( payload, process.env.ACCESS_TOKEN_SECRET, {
-          expiresIn: "1d",
-        });
+        const token = jwt.sign( payload, process.env.ACCESS_TOKEN_SECRET );
         return new Promise((resolve, reject) => {
           resolve({
             message: "Login successful",
@@ -93,6 +91,19 @@ class Service {
       response.status = 400;
       return response;
     }
+  }
+
+  async resetService(req, res) {
+    let foundUser = await userModel.findUser({ _id: req.data.id });
+    if (foundUser.data) {
+      console.log(foundUser.data);
+
+      const hashedPassword = await bcryptjs.hash(req.password, 8);
+      let newOnePassword = { password: hashedPassword };
+      let newOneData = newmodel.updateOne({ _id: req.data.id }, newOnePassword);
+      return newOneData;
+    }
+    else return foundUser;
   }
 }
 

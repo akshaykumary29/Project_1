@@ -19,9 +19,8 @@ module.exports = {
             text: "",
             html: `
             hi,
-            Here is the link to reset password <a href= ""> click here </a>
-            thanks.
-            `
+            Here is the link to reset password <a href= "http://localhost:4000/resetPassword"> click here </a>
+            thanks.`
         };
 
         transport.sendMail(mailOptions, function(err, data)  {
@@ -29,7 +28,7 @@ module.exports = {
                 console.log('Error');
                 console.log(err);
             } else {
-                console.log("Email Sent Successfully");
+                console.log("Email Sent...");
             }
         });
     }

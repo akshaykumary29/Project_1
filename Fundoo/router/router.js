@@ -15,6 +15,8 @@ router.post("/register", controller.registerUser);
 router.post("/login", controller.loginUser);
 // route api for forgetPassword
 router.post("/forgetPassword", controller.forgetUser);
+// route api for resetPassword
+router.post("/resetPassword", auth, controller.resetUser);
 
 // route api for addNotes
 router.post("/addNotes", auth, notesController.addNotes);

@@ -34,6 +34,15 @@ class Registration {
         return res.status(400).send(err);
       })
   }
+
+  resetUser(req, res) {
+    service
+      .resetService(req.body).then((result) => {
+        res.status(200).json(result)
+      }).catch((err) => {
+        return res.status(401).send(err);
+      })
+  }
 }
 
 // export the Registration
