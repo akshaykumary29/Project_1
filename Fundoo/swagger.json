@@ -9,8 +9,8 @@
     "paths": {
       "/register": {
         "post": {
-          "tags": ["User Authentication"],
-          "summary": "Register a User.",
+          "tags": ["User"],
+          "summary": "Register a new User.",
           "parameters": [
             {
               "in": "body",
@@ -96,7 +96,7 @@
       "/forgetPassword": {
         "post": {
             "tags": [""],
-            "summary": "Login a User.",
+            "summary": "Reset a User.",
             "parameters": [
                 {
                     "in": "body",

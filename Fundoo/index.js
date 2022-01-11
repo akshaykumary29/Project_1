@@ -10,7 +10,9 @@ const router = require("./router/router");
 const swaggerJSdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-const swaggerDocument = require("../swagger.json");
+const swaggerDocument = require("./swagger.json");
+
+const logger = require('../Fundoo/config/logger');
 
 // start your app
 const app = express();
@@ -22,11 +24,12 @@ app.use(express.json());
 // app.use(expressValidator());
 app.use("/", router);
 
-// launching application at particular por
+// launching application at particular port
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
   console.log(`Application is running on port ${port}`);
+  logger.info(`Application is running on port ${port}`);
 });
 
 
