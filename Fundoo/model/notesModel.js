@@ -1,10 +1,12 @@
-// const res = require("express/lib/response");
+
+// import
 const mongoose = require("mongoose");
 
 const NotesSchema = new mongoose.Schema(
   {
     title: {
       type: String,
+      required: true
     },
     description: {
       type: String,
@@ -42,17 +44,17 @@ class NotesModel {
           console.log(obj);
             obj
                 .save().then((data) => {
-                    (response.success = true),
+                    // (response.success = true),
                     (response.message = "Register Successfully"),
                     (response.data = data),
-                    (response.status = 200);
-                    resolve({ response });
+                    // (response.status = 200);
+                    resolve(response);
                 }).catch((err) => {
                     (response.success = false),
                     (response.message = "Register failed"),
                     (response.data = ""),
                     (response.status = 500);
-                    reject({ response });
+                    reject(response);
                 })
         })
     }
@@ -70,11 +72,11 @@ class NotesModel {
                 .then((data) => {
                   // console.log(data);
                     if (data) {
-                        (response.success = true),
+                        // (response.success = true),
                         (response.data = data),
                         (response.message = "Notes Found"),
-                        (response.status = 200);
-                        resolve({ response });
+                        // (response.status = 200);
+                        resolve(response);
                     } else {
                         resolve({
                             message: "Notes are Not Found",

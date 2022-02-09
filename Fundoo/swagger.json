@@ -137,7 +137,7 @@
           "parameters": [
               {
                   "in": "body",
-                  "name": "Reset Data",
+                  "name": "Reset Password",
                   "required": true,
                   "schema": {
                       "type": "object",
@@ -181,6 +181,207 @@
                 "description":"Internal Server Error."
               }
             }
+        }
+      },
+
+      "/addNote": {
+        "post":{
+          "tags":[ "" ],
+          "summary": "Add a Note.",
+          "parameters":[
+            {
+              "in":"body",
+              "name":"AddNotes Data",
+              "required": true,
+              "schema":{
+                "type":"object",
+                "required":[
+                  "title", "description", "isArchieved", "isBin", "colour"
+                ],
+                "properties":{
+                  "title": {
+                    "type":"string"
+                  },
+                  "description": {
+                    "type":"string"
+                  },
+                  "isArchieved": {
+                    "type":"string"
+                  },
+                  "isBin": {
+                    "type":"string"
+                  },
+                  "colour": {
+                    "type":"string"
+                  }
+                }
+              }
+            },
+            {
+              "in":"header",
+              "name":"token",
+              "required":true,
+              "schema":{
+                "type":"object",
+                "required":[ "token" ],
+                "properties":{
+                  "token":{ "type":"string" }
+                }
+              }
+            }
+          ],
+
+          "description":"Register a user and get registered user `object` back from the server.",
+          "produces":"application/json",
+          "responses":{
+            "200":{
+              "description":"Success"
+            }
+          }
+        }
+      },
+
+      "/getNotes/{id}": {
+        "get":{
+          "tags":[ "" ],
+          "summary": "Get a Note by Id for perticuler user id",
+          "parameters":[
+            {
+              "in":"header",
+              "name": "token",
+              "required":true,
+              "schema":{
+                "type":"object",
+                "required":[ "token" ],
+                "properties":{
+                  "token":{ "type":"string"}
+                }
+              }
+            }
+          ],
+          "description": "get note `object` back from the server.",
+          "produces":"application/json",
+          "responses":{
+            "200":{
+              "description":"Success"
+            }
+          }
+        }
+      },
+      "/updateNote/{id}": {
+        "put": {
+          "tags":[ "" ],
+          "summary": "Update a Notes.",
+          "parameters":[
+            {
+              "in":"body",
+              "name":"updateNote data",
+              "required":true,
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "title":{
+                    "type":"string"
+                  },
+                  "description": {
+                    "type":"string"
+                  },
+                  "isArchieved":{
+                    "type":"string"
+                  },
+                  "isBin":{
+                    "type":"string"
+                  },
+                  "colour":{
+                    "type":"string"
+                  },
+                  "_id":{
+                    "type":"string"
+                  }
+                }
+              }
+            },
+            {
+              "in":"header",
+              "name":"token",
+              "required":true,
+              "schema":{
+                "type":"object",
+                "required":[ "token" ],
+                "properties":{
+                  "token":{
+                    "type":"string"
+                  }
+                }
+              }
+            }
+          ],
+          "description": "update a Note and get update Note `object` back from the server.",
+          "produces":"application/json",
+          "responses":{
+            "200":{
+              "description":"Success"
+            }
+          }
+        }
+      },
+
+      "/isArchieved": {
+        "get":{
+          "tags":[ "" ],
+          "summary": "Get isArchieved Notes",
+          "parameters":[
+            {
+              "in":"header",
+              "name":"token",
+              "required":true,
+              "schema":{
+                "type":"object",
+                "required":[ "token" ],
+                "properties":{
+                  "token":{
+                    "type":"string"
+                  }
+                }
+              }
+            }
+          ],
+          "description": "Get isArchieved `object` back from the server.",
+          "produces":"application/json",
+          "responses":{
+            "200":{
+              "description":"Success"
+            }
+          }
+        }
+      },
+      "/isBin": {
+        "get":{
+          "tags":[ "" ],
+          "summary": "Get isBin Note",
+          "parameters":[
+            {
+              "in":"header",
+              "name":"token",
+              "required":true,
+              "schema":{
+                "type":"object",
+                "required":[ "token" ],
+                "properties":{
+                  "token":{
+                    "type":"string"
+                  }
+                }
+              }
+            }
+          ],
+          "description": "Get isBin `object` back from the server.",
+          "produces":"application/json",
+          "responses":{
+            "200":{
+              "description":"Success"
+            }
+          }
         }
       }
     }

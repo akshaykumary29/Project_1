@@ -1,8 +1,11 @@
+
+// import
 const notesModel = require("../model/notesModel");
 const Notes = notesModel.notes;
 const NotesModel = new notesModel.NotesModel();
 
 class ServiceNotes {
+  // save all notes
   async createNotes(req, res) {
     let newUser = new Notes({
       title: req.title,
@@ -16,12 +19,14 @@ class ServiceNotes {
     return saveNote;
   }
 
+  // get notes
   async getNotes(req, res) {
     let foundNotes = await NotesModel.findNotes({ user_id: req.data.id });
     if (foundNotes) 
     return foundNotes;
   }
 
+  // update notes
   async updateNotes(req, res) {
       let foundNotes = await NotesModel.searchNote(req, res);
         console.log(foundNotes);
@@ -32,6 +37,7 @@ class ServiceNotes {
     return foundNotes;
   }
 
+  // delete notes
   async deleteService(req, res) {
     let foundNotes = await NotesModel.searchNote(req);
     if(foundNotes) {
@@ -39,19 +45,14 @@ class ServiceNotes {
     }
   }
 
-  // async isArchievedService(req, res) {
-  //   let foundNotes = await NotesModel.findNotes({ user_id: req.data.id, isArchived: true });
-  //   if(foundNotes) {
-  //     return foundNotes
-  //   }
-  // }
-
+  // archived notes
   async isArchievedService(req, res) {
     let note = { user_id: req.data.id, isArchived: true }
     let achieved = await NotesModel.findNotes(note);
     return achieved;
   }
 
+  // deleted notes
   async isBinService(req, res) {
     let note = { user_id: req.data.id, isDeleted: true }
     let bin = await NotesModel.findNotes(note);

@@ -6,20 +6,23 @@ const notesController = require('../controller/notesController');
 
 // const validate = require("../middleware/validation");
 const auth = require("../middleware/auth");
+const validate = require("../middleware/validation");
 // to create new route object
 const router = express.Router();
 
+
+
 // route api for register 
-router.post("/register", controller.registerUser);
+router.post("/register",validate.registerValidation, controller.registerUser);
 // route api for login
-router.post("/login", controller.loginUser);
+router.post("/login",validate.loginValidation, controller.loginUser);
 // route api for forgetPassword
-router.post("/forgetPassword", controller.forgetUser);
+router.post("/forgetPassword",validate.forgetPasswordValidation, controller.forgetUser);
 // route api for resetPassword
 router.post("/resetPassword", auth, controller.resetUser);
 
 // route api for addNotes
-router.post("/addNotes", auth, notesController.addNotes);
+router.post("/addNotes", auth,validate.addNotes, notesController.addNotes);
 // route api for getNotes
 router.get("/getNotes", auth, notesController.getNotes);
 // route api for update

@@ -1,0 +1,38 @@
+{
+    "UserData": {
+        "firstName": "Akshay",
+        "lastName": "Yamm",
+        "email": "akshay@gmail.com",
+        "password": "akshay12345"
+    },
+    "registrationWithImproperDetails": {
+        "firstName": "Akshay1",
+        "lastName": "YAmmm",
+        "email": "akshay@gmail.com",
+        "password": "akshay123"
+    },
+    "registrationWithOutEmail": {
+        "firstName": "Akshay",
+        "lastName": "Yamm",
+        "password": "akshay12345"
+    },
+    "registrationWithOutfirstName": {
+        "lastName": "Yamm",
+        "email": "akshay123@gmail.com",
+        "password": "akshay12345"
+    },
+    "login": {
+        "email": "akshay123@gmail.com",
+        "password": "akshay12345"
+    },
+    "loginWithImproperDetails": {
+        "email": "akshay23@gmail.com",
+        "password": "@kshay1345"
+    },
+    "properEmail": {
+        "email": "akshay123@gmail.com"
+    },
+    "improperEmail": {
+        "email": "akshay23@gma.com"
+    }
+}

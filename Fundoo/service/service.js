@@ -1,16 +1,18 @@
+
+// import
 require("dotenv").config();
 const { response } = require("express");
 const model = require("../model/model");
+const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const nodemailer = require("../middleware/nodemailer");
 
+// create database
 const userModel = new model.UserModel();
 const newmodel = model.User;
 
-const bcryptjs = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-
-const nodemailer = require("../middleware/nodemailer");
-
 class Service {
+  // signup service
   async UserRegistration(req, res) {
     let foundUser = await userModel.findUser(req);
     let length = foundUser.data;
@@ -30,6 +32,7 @@ class Service {
     }
   }
 
+  // login service
   async UserLogin(req, res) {
     let findUser = await userModel.findUser(req);
 
@@ -70,12 +73,13 @@ class Service {
     } else return findUser;
   }
 
+  // forget password service
   async forgetService(req, res) {
     let response = {
       success: true,
       message: "",
       data: ""
-    }
+    };
 
     let foundUser = await userModel.findUser({ email: req.email });
     if(foundUser.data) {
@@ -83,7 +87,12 @@ class Service {
       const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET)
 
       let update = await nodemailer.sendMail(foundUser.data.email, token);
-      return update;
+      response.success = true,
+      response.message = "mail to successfully",
+      response.data = update,
+      response.status = 200;
+      return response;
+      // return update;
     } else {
       response.success = false,
       response.message = "User Not Found",
@@ -93,7 +102,9 @@ class Service {
     }
   }
 
+  // reset pasword service
   async resetService(req, res) {
+
     let foundUser = await userModel.findUser({ _id: req.data.id });
     if (foundUser.data) {
       console.log(foundUser.data);

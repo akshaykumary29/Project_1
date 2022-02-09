@@ -1,19 +1,25 @@
+
 // import or require mongoose
 const mongoose = require("mongoose");
 
+// database Schema
 const UserSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
+      required: true
     },
     lastName: {
       type: String,
+      required: true
     },
     email: {
       type: String,
+      required: true
     },
     password: {
       type: String,
+      required: true
     },
   },
   {
@@ -23,7 +29,9 @@ const UserSchema = new mongoose.Schema(
 
 const User = mongoose.model("Tests", UserSchema);
 
+// model class
 class UserModel {
+  // method to find user
   findUser(req) {
     var response = {
       message: "",
@@ -32,10 +40,10 @@ class UserModel {
       status: 200,
     };
     return new Promise((resolve, reject) => {
-      // console.log(req);
+     
       User.findOne({ email: req.email }) // built in
         .then((data) => {
-          // console.log(data);
+          
           if (data) {
             (response.success = true),
               (response.data = data),
@@ -57,6 +65,7 @@ class UserModel {
     });
   }
 
+  // method to register user
   RegisterUser(obj) {
     let response = {
       success: true,
@@ -73,14 +82,14 @@ class UserModel {
             (response.message = " Registered Successfully"),
             (response.data = data),
             (response.status = 200);
-          resolve({ response });
+          resolve(response);
         })
         .catch((err) => {
           (response.success = false),
             (response.message = " Registered Failed"),
             (response.data = ""),
             (response.status = 400);
-          reject({ response });
+          reject(response);
         });
     });
   }

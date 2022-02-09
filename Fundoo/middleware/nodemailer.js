@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const logger = require("../config/logger");
 require("dotenv").config();
 
 module.exports = {
@@ -19,16 +20,16 @@ module.exports = {
             text: "",
             html: `
             hi,
-            Here is the link to reset password <a href= "http://localhost:4000/resetPassword"> click here </a>
+            Here is the link to reset password <a href= "http://localhost:3000/resetPassword/${token}"> click here </a>
             thanks.`
         };
 
         transport.sendMail(mailOptions, function(err, data)  {
             if(err) {
                 console.log('Error');
-                console.log(err);
+                logger.error(err);
             } else {
-                console.log("Email Sent...");
+                logger.info("Email Sent successfully");
             }
         });
     }
